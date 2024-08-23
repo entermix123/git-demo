@@ -2,3 +2,8 @@ some text
 
 
 added some text
+
+
+added more text to test color settings
+
+added more text to test color settings 2
