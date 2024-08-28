@@ -1,3 +1,5 @@
 add editing from rebase2.txt file in main branch
 
 make editing from feature1 branch
+
+made changes from feature1 branch again
