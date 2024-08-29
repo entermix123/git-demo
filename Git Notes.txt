@@ -1,0 +1,2020 @@
+Master the Git Workflow and Collaborate Effectively with Github: A Comprehensive Bootcamp for Beginners and Beyond
+May 2024
+
+Fettah Ben
+Microsoft ADFS, IT Manager.
+
+Git - Free and Open source Distributed Version Control System
+
+GitHub - Source for Project and Sources [GitLab, BitBucket] that using Git
+
+
+Two types of Version control systems:
+	1. Centralized version control systems (CVCS)
+	2. Decentralized version control systems (DVCS)	- focus of the course
+
+
+Git Terms: Explained
+Git Terms: Explained
+Git is a tool shrouded in terminology and jargon, which can often be off-putting for new users, or those who know Git basics but want to become Git masters. And while nothing can replace getting in and getting used to Git on the command line and elsewhere, sometimes we just need a little explanation of the terminology behind the tools.
+
+Glossary
+
+Branch, Checkout, Cherry-picking, Clone, Fetch, Fork, HEAD, Index, Master, Merge, Origin, Pull/Pull Request, Push, Rebase, Remote, Repository, Stash, Tag, Upstream
+
+Explained:
+
+Branch
+A version of the repository that diverges from the main working project. Branches can be a new version of a repository, experimental changes, or personal forks of a repository for users to alter and test changes.
+
+Checkout
+The git checkout command is used to switch branches in a repository. git checkout testing-br would take you to the testing-br branch whereas git checkout master would drop you back into master. Be careful with your staged files and commits when switching between branches.
+
+Cherry-picking
+When cherry-picking a commit in Git, you are taking an older commit, and rerunning it at a defined location. Git copies the changes from the original commit, and then adds them to the current location.
+
+Clone
+A clone is a copy of a repository or the action of copying a repository. When cloning a repository into another branch, the new branch becomes a remote-tracking branch that can talk upstream to its origin branch (via pushes, pulls, and fetches).
+
+Fetch
+By performing a Git fetch, you are downloading and copying that branch’s files to your workstation. Multiple branches can be fetched at once, and you can rename the branches when running the command to suit your needs.
+
+Fork
+Creates a copy of a repository.
+
+HEAD
+HEAD is a reference variable used to denote the most current commit of the repository in which you are working. When you add a new commit, HEAD will then become that new commit.
+
+Index
+The working, or staging, area of Git. Files that have been changed, added and deleted will be staged within the index until you are ready to commit the files. To see what is set in your Git index, run git status within your repository. The green files are staged and ready to commit, whereas the red files have not yet been added to staging for the next commit.
+
+Master
+The primary branch of all repositories. All committed and accepted changes should be on the master branch. You can work directly from the master branch, or create other branches.
+
+Merge
+Taking the changes from one branch and adding them into another (traditionally master) branch. These commits are usually first requested via pull request before being merged by a project maintainer.
+
+Origin
+The conventional name for the primary version of a repository. Git also uses origin as a system alias for pushing and fetching data to and from the primary branch. For example, git push origin master, when run on a remote, will push the changes to the master branch of the primary repository database.
+
+Pull/Pull Request
+If someone has changed code on a separate branch of a project and wants it to be reviewed to add to the master branch, that someone can put in a pull request. Pull requests ask the repo maintainers to review the commits made, and then, if acceptable, merge the changes upstream. A pull happens when adding the changes to the master branch.
+
+Push
+Updates a remote branch with the commits made to the current branch. You are literally “pushing” your changes onto the remote.
+
+Rebase
+When rebasing a git commit, you can split the commit, move it, squash it if unwanted, or effectively combine two branches that have diverged from one another.
+
+Remote
+A copy of the original branch. When you clone a branch, that new branch is a remote, or clone. Remotes can talk to the origin branch, as well as other remotes for the repository, to make communication between working branches easier.
+
+Repository (“Repo”)
+In many ways, you can think of a Git repository as a directory that stores all the files, folders, and content needed for your project. What it actually is, is the object database of the project, storing everything from the files themselves, to the versions of those files, commits, deletions, et cetera. Repositories are not limited by user, and can be shared and copied (see: fork).
+
+Stash
+While working with Git, you may need to make multiple changes to files, but you may not want all changes to go in one commit. If you want to pause the changes you are working on now in favor of working on another issue or improvement, you can “stash” your changes, essentially clearing them from the staging area until the changes are called again. You can only stash one set of changes at a time. To stash your staging area use git stash [files]; to retrieve the stashed files, run git stash pop. You can also clear the stashed files with git stash drop.
+
+Tag
+Tags are used to define which portions of a project’s Git history is most important. Often this is used to note point releases of a project. Tags can be added to the commit you are working with or added after-the-fact when needed.
+
+Upstream
+While there is not necessarily a default “upstream” or “downstream” for Git projects, upstream can be considered where you push your Git changes — this is often the master branch of the project within the origin
+
+
+=====================
+PRACTICAL INFORMATION
+=====================
+
+
+---------------------------
+Create GitHub Account/Login
+---------------------------
+
+Create a repo
+
+	- profile/repository/new
+		- Repo name: repo_name
+		- Description (optional)
+		- Public/Private
+		- Set README.md	(markdown syntax) - https://hackmd.io/s/how-to-create-table
+			- Set instructions
+			- Choose License
+		- Create repository
+
+
+---------------------
+Install Git on our OS
+---------------------
+
+Download Git - https://git-scm.com/downloads
+
+Install Git - start downloaded file / install/next...
+
+Open Git Bash and check version
+	terminal --> git version
+
+Preferred CLI - Cmder - https://cmder.app/
+Cmder Git - https://github.com/cmderdev/cmder
+
+Keyboard shortcuts
+Tab manipulation
+Ctrl + ` : Global Summon from taskbar
+Win + Alt + p : Preferences (Or right click on title bar)
+Ctrl + t : New tab dialog (maybe you want to open cmd as admin?)
+Ctrl + w : Close tab
+Shift + Alt + number : Fast new tab:
+
+1. CMD
+2. PowerShell
+
+Alt + Enter : Fullscreen
+Shell
+Ctrl + Alt + u : Traverse up in directory structure (lovely feature!)
+End, Home, Ctrl : Traverse text as usual on Windows
+Ctrl + r : History search
+Shift + mouse : Select and copy text from buffer
+Right click / Ctrl + Shift + v : Paste text
+
+
+-------------------------
+Clone project with CMDER
+-------------------------
+
+Create empty directory with the name of the project and navigate to it in cmder.
+
+Set default editor in cmder (not vim for now):
+	terminal --> git config --global core.editor "notepad"
+	or
+	terminal --> git config --global core.editor "code --wait"
+
+Clone the repository:
+	terminal --> git clone <repo_https_url>
+
+Create local branch dev from local main:
+	terminal --> git checkout -b dev
+
+Set upstream from local dev to local main:
+	terminal --> git branch --set-upstream-to=main dev
+
+.. work on dev branch...
+
+Push data to local main:
+	terminal --> git add <file_name>
+	terminal --> got commit -m "example message"
+	terminal --> git push . dev:main	or 	git push . HEAD:main
+
+Go to main branch:
+	terminal --> git switch main
+
+Check staged changes:
+	terminal --> git status
+
+Push commits from sub-branches to remote main:
+	terminal --> git push origin main
+
+Stage changed files if any on main:
+	terminal --> git add <file_name>
+
+Remove staged files:
+	terminal --> git restore --staged <file_name>
+	terminal --> git reset head <file_name>			// same as restore
+
+Check staged changes:
+	terminal --> git status
+
+
+Commit (prepare sending files to repo):
+	terminal --> git commit -m "message of the commit"
+
+Push commits to remote main:
+	terminal --> git push origin main
+
+-------------------------------------
+Manage remote branches from local CLI
+-------------------------------------
+
+Create and Switch to a New Local Branch:
+	terminal --> git checkout -b new_branch_name
+
+Set the Upstream Branch:
+Use the git push -u command to push the new branch to the remote repository and set the upstream branch. Replace origin with the name of your remote (usually origin), and new-branch with the name of your new branch.
+	terminal --> git push -u origin new_remote_branch_name
+
+Verifying the Upstream Branch:
+	terminal --> git branch -vv
+
+
+Or create a Local Branch Tracking an Existing Remote Branch:
+	terminal --> git checkout -b new_local_branch_name origin/remote_existing_branch_name
+
+Or create a new local branch and set the upstream to new remote branch:
+	terminal --> git checkout -b new_branch_name
+	terminal --> git push -u origin new_branch_name
+
+-------------------------
+Configure git credentials
+-------------------------
+
+Create commit:
+	terminal --> git commit -m "message of the commit"
+
+If asked for email and password execute the commands:
+	terminal --> git config --global user.email "example@email.com"
+	terminal --> git config --global user.name "name"
+
+We can commit multiple times before push changes to server.
+
+
+Check current branch:
+	terminal --> git branch
+
+Check connected remotes:
+	terminal --> git remote -v
+
+Send changes to remote repo:
+	terminal --> git push origin main	// send changes from origin (local main) to main (remote repo)
+
+	If asked about credentials - enter them
+
+
+----------------
+Git Project Fork
+----------------
+
+When I make changes on project I don't have permissions to work on, GitHub automatically create a fork (my copy of the project with my changes)
+
+
+------------------------
+Delete Project in GitHub
+------------------------
+
+go to the repository/settings/Delete this repository
+
+
+
+--------------------------------
+Invite members in GitHub Project
+--------------------------------
+
+Got to Project/Settings/Manage Access/Invite a collaborator
+	- enter the name of the collaborator
+	- confirm invitation
+
+The invited collaborator have to accept the invitation by email to have access to edit the project.
+
+
+
+-----------------------------------
+Pull Changes From Remote Repository
+-----------------------------------
+
+terminal --> git pull origin
+
+There are two command under 'git pull' - 'git checkout' and 'git merge'
+
+
+
+-----------------------------
+Set Global Username and Email
+-----------------------------
+
+show what username we are using at the moment
+	terminal --> git config --global user.name 
+
+show what email we are using at the moment
+	terminal --> git config --global user.email 
+
+edit current global username
+	terminal --> git config --global user.name "new_name"
+
+edit current global email
+	terminal --> git config --global user.name "new_email"
+
+how to set username and email for specific project:
+	- navigate to the specific repository
+	- terminal --> git config --local user.name "name for this repo"
+
+	- check username for this repo
+	- terminal --> git config --local user.name
+
+So if we push changes for specific repo, the used name will be the local. If we push any changes in other reoo, the used name will be the global user.name. Same with the user.email.
+
+
+
+-------------------------------------
+List all Variables Set in Config File
+-------------------------------------
+
+list all configs:
+	terminal --> git config -l
+
+open git help
+	terminal --> git config --help
+
+
+-------------------------------------
+Global and Local Windows Config Files
+-------------------------------------
+
+show windows git configs:
+	terminal --> git config -l --show-origin
+
+open current folder in explorer:
+	terminal --> explorer .
+
+
+
+----------------------------------------
+Change the Remote URL to Your Repository
+----------------------------------------
+
+show current remote repository url:
+	terminal --> git config remote.origin.url
+
+edit current remote repository url:
+	terminal --> git config remote.origin.url "new_or_corrected_url"
+
+
+
+--------------------------------------------------
+Edit colors for added, changed and untracked files
+--------------------------------------------------
+
+show windows git configs:
+	terminal --> git config -l --show-origin
+
+open git config file: in my case - C:/Users/balab/.gitconfig
+
+add:
+---------------------------------------------
+[user]
+	name = xxxxxxx
+	email = xxxxxxxx@xxxx.com
+
+[color "status"]
+added = yellow
+changed = red bold
+untracked = magenta bold
+
+[color "branch"]
+remote = yellow
+---------------------------------------------
+
+delete color setting to return to default settings.
+
+
+
+---------------------------------
+Associating Text Editors with Git
+---------------------------------
+
+open local repo config:
+	terminal --> git config --local --edit
+
+if it is opened in cmder is not comfy to edit with it, so we want to change default editor as:
+	* we can set the path to the editor we want in the quotes if system cannot find it automatically. in this case we use already installed VSCode.
+
+	- navigate to the repo and set the configuration for editor
+        - terminal --> git config --local core.editor "code --wait"
+
+	- we can set global editor
+	- terminal --> git config --global core.editor "code --wait"
+
+	- example for setting notepad++
+	- terminal --> "'C:/Program Files (x86)/Notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+
+
+
+----------------------------
+Ignore certain files in  Git
+----------------------------
+
+navigate to specific repo and add git ignore file:
+	terminal --> touch .gitignore
+
+edit .gitignore file:
+	terminal --> .gitignore --edit
+
+add some files that must ignored for git. This example is common:
+--------------------------------------------------------------------------------
+# An example global gitignore file
+#
+# Place a copy if this at ~/.gitignore_global
+# Run `git config --global core.excludesfile ~/.gitignore_global`
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+*.pyo
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.msi
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temporary files #
+###################
+*.bak
+*.swp
+*.swo
+*~
+*#
+
+# IDE files #
+#############
+.vscode
+.idea
+.iml
+*.sublime-workspace
+--------------------------------------------------------------------------------
+
+	
+add ignored type file:
+	terminal --> touch hello.rar
+
+show all files in the directory - should show ignored files also:
+	terminal --> ls
+	or
+	terminal --> dir
+
+check if file is ignored. Must not be listed:
+	terminal --> git status
+
+add git ignore file to the repo:
+	terminal --> git add .
+	terminal --> git commit -m "added git ignore file"
+	terminal --> git push
+
+
+
+
+---------------------------------------------------------------
+Configuring Ignored Files For All Repositories on Your Computer
+---------------------------------------------------------------
+
+navigate to c:\Users\Username
+	- create global git ignore file
+		- terminal --> touch .gitignore_global
+		- add specific file types in the file
+	- set configuration for global git ignore file:
+		- terminal --> git config --global core.excludesfile ~/.gitignore_global
+
+
+
+
+-----------------------------
+Rename An Existing Git Remote
+-----------------------------
+
+show current remote name:
+	terminal --> git remote 
+
+show remote url of the remote repo:
+ 	terminal --> git remote -v
+
+rename the name of the remote repo:
+	* example syntax: terminal --> git remote rename <old_name> <new_name>
+
+	terminal --> git remote rename origin git-hub-course
+
+
+
+
+
+============================================
+Managing Git Hub with SSH - secure shell key
+============================================
+
+
+-------------------------
+	About SSH
+-------------------------
+
+Secure Shell Key (SSH) is not option only for GitHub but global security service.
+
+show ssh service help
+	terminal --> ssh-keygen --help
+
+
+
+------------------------
+Generating a New SSH Key
+------------------------
+
+generate SSH key and use it in GitHub 
+	- create ssh key with RSA (Rivest-Shamir-Adleman) - https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+	- terminal --> ssh-keygen -t rsa -b 4096 -C "email_of_the_GitHub_account"
+	- asks you if we want to save the ssh key file to specific folder / press enter
+	- asks you for add password if needed / add pass or leave empty - enter
+
+
+-------------------------------------------
+Adding a New SSH Key to Your GitHub Account
+-------------------------------------------
+
+Account/Settings/SSH and GPG keys and add the generated SSH key
+
+On https://github.com/settings/keys we can add new key.
+
+
+----------------------------
+Testing Your SSH Connections
+----------------------------
+
+test SSH connection:
+	- terminal --> ssh -T git@github.com
+	- asks you if you want to continue the connection - yes
+	- enter password
+
+-----------------------------------------
+Create a New Local Git Repository (Empty)
+-----------------------------------------
+
+navigate to repositories folder and create new folder with name of the repo
+	terminal --> mkdir repo_name
+
+enter the newly created repo folder
+	terminal --> cd repo_name
+
+initialize git repo:
+	terminal --> git init
+
+create a new file:
+	terminal -- touch text.txt
+
+show git status:
+	terminal --> git status
+
+add created file:
+	terminal --> git add .
+
+commit the changes:
+	terminal --> git commit -m "created text file"
+
+
+--------------------------------------------------
+Create new repo in GitHub and copy the SHH Address
+--------------------------------------------------
+
+set the remote repo to current local repo:
+	terminal --> git remote add origin <remote_repo_shh_address>
+
+check if the remote repo is configured correctly:
+	terminal --> git config -l
+	see at "remote.origin.url=*****"
+
+-------------------------------------------------
+Push the Code from Your Local Repo to GitHub Repo
+-------------------------------------------------
+
+check current git status:
+	terminal --> git status
+
+push first changes to remote git repository:
+	terminal --> git push -u origin main
+
+asks you for password if password is set (we want to set password if we are not the only  one working on this computer):
+	terminal --> password
+
+
+
+SHORT COMMAND FOR ADD AND PUSH CODE TO EXISTING REPO IN GITHUB:
+
+set the remote repo to current local repo:
+	terminal --> git remote add origin <remote_repo_shh_address>
+
+push first changes to remote git repository ('-u' - update):
+	terminal --> git push -u origin main
+
+
+------------------------------------------
+Push the Code by Your GitHub Email Account
+------------------------------------------
+
+check current used user email:
+	terminal --> git config --global user.email
+
+set the correc temail if current one is not correct (SSH requirements):
+	terminal --> git config --global user.email "some@email.com"
+
+Make some changes to the code in the repo.
+
+check git status:
+	terminal --> git status
+
+add changes:
+	terminal --> git add .
+
+commit changes: 
+	terminal --> git commit -m "changes message"
+
+push changes:
+	terminal --> git push -u origin main
+
+asks you for password:
+	terminal --> password
+
+
+========================================
+Clone The Project To Send A Pull Request
+========================================
+
+Find public repo and make a copy or fork
+
+-------------------------------------------
+Edit The Project Before Send a Pull Request
+-------------------------------------------
+
+1. Edit code in the project/fork
+	- Commit directly to the Main branch				- update local project/fork
+	- Create a new branch for this commit and start a pull request 	- create pull request for original project
+
+
+-------------------------------------------
+Create a Pull Request on GitHub From a Fork
+-------------------------------------------
+
+We can create Pull Request for original project in fork project/Pull request/New pull request
+	- GitHub check merge capability
+	- Show changes, we can split changes and look in more details
+	- Create pull request
+		- Add title and description
+		- Check Allow edits by the maintainers
+		- Press 'Create Pull Request' button
+
+
+--------------------------------------
+Review, Approve and Merge Pull Request
+--------------------------------------
+
+In the original project we have 1 Pull Request. 
+	- Open Pull Request tab and open the pull request.
+	- View commits and changes
+	- Give name and description and Press 'Merge pull request' button
+
+
+--------------------------------------
+Review and Delete Closed Pull Request
+--------------------------------------
+
+In the Fork project go to Pull Request Tab and open the closed pull request
+	- Go to Fork Settings after merging
+	- Delete Pull Request
+
+----------------------------------
+Viewing the project's contributors
+----------------------------------
+
+In the original project got o Pull Request Tab
+	- we can see how many and who created pull request to our project
+
+In 'Code' Tab we can track all changes and revert if necessary
+
+In 'Insights' Tab we can see statistics of contributors
+
+
+------------------------------
+Commit Changes To a New Branch
+------------------------------
+
+From Fork project - Edit Code and use second option
+	- Create a new branch for this commit and start a pull request 	- create pull request for local fork
+	- Name the branch and press 'Propose new files' button - this creates local/fork pull request
+	- The member opens a pull request - give a title and description / Create Pull Request
+	- Admin of the Fork project now can approve the local/fork pull request
+
+------------------------------------
+Open Multiple Pull Request on GitHub
+------------------------------------
+
+	- New member create new file in the local/form project
+	- Create a new branch for this commit and start a pull request - create pull request for local fork
+	- Name the branch and press 'Propose new files' button - this creates local/fork pull request
+	- The member opens a pull request - give a title and description / Create Pull Request
+	
+	- Create few more files and create local/fork branches and pull requests 
+
+
+-----------------------------------------------
+Merge or Close Multiple Pull Requests on GitHub
+-----------------------------------------------
+
+Admin of the Fork project now can review/correct or approve multiple local/fork pull requests from multiple team members
+
+Admin goes to Pull Request Tab and check all correct pull requests that are ready to merge
+	- review the changes
+	- Press 'Merge pull request' button	
+	- Press 'Confirm merge' button
+	- We can Delete the branch if needed with the option 'Delete branch'
+	- We can Close Pull request and NOT merge it with 'Close and comment' button
+
+Now in Form project we have fewer pull request remaining
+
+Repeat these steps for all local/form project pull requests as Admin
+
+
+--------------------------------------
+Review changed Files in a Pull Request
+--------------------------------------
+
+The Admin of the local/fork project review and merge or not merge all files edited by his team.
+
+Then the Admin create a Pull Request to the original project with all approved request in the fork.
+	- Open Pull Request Tab
+	- Create New Pull Request
+	- Give name, description and check 'Allow edits by maintainers'
+	- press 'Create pull request' button
+
+Now The Owner of the original project have one new pull request (with all data from the fork project) waiting to be merged.
+	- The owner now can open the pull request, review and merge the data into the original project.
+
+
+
+----------------------------
+Everything About Git Aliases
+----------------------------
+
+Open terminal (CMDER)
+
+Create status alias as st:
+	terminal --> git config --global alias.st status
+
+Show the command that the alias is applied for:
+	terminal --> git config --global alias.st
+
+Create branch alias as br:
+	terminal --> git config --global alias.br branch
+
+Create alias for "commit -m" as cm:
+	terminal --> git config --global alias.cm "commit -m"
+
+Create new file to test the aliases:
+	terminal --> touch test123.txt
+	terminal --> git st
+	terminal --> git add .
+	terminal --> git cm "added test file"
+
+We can check all created aliases in the git config file.
+	In my case - C:/Users/balab/.gitconfig
+	We can add additional aliases if we need
+
+
+------------------------------------------------
+Pull The Pull Request Change to Local Repository
+------------------------------------------------
+
+Update local repository from GitHub Server:
+	terminal --> git status
+	terminal --> git pull origin main
+		- if using SSH key enter password
+
+
+
+------------------------------
+Creating and Deleting Branches
+------------------------------
+
+Check current branches:
+	terminal --> git branch
+
+Create new branch named Scroll:
+	terminal --> git branch Scroll
+
+Set Scroll branch as current:
+	terminal --> got checkout Scroll
+
+Set main branch as current:
+	terminal --> got checkout main
+
+Delete Scroll branch:
+	terminal --> git branch --delete Scroll		// default syntax
+	terminal --> git branch --d Scroll		// delete short syntax
+	terminal --> git branch -D Scroll		// Force delete branch without push changes
+
+
+
+---------------------------------
+Switch Between Local Git Branches
+---------------------------------
+
+Create new branch and go to it:
+	terminal --> git checkout -b dev2	// create and go to branch dev2
+	terminal --> git checkout -B dev2	// delete branch dev2, create it again and go to it
+
+Set upstream from local development to local main:
+	terminal --> git branch --set-upstream-to=main development
+
+Set upstream from local development to remote origin:
+	terminal --> git branch --set-upstream-to=origin development
+
+---------------------------
+Renaming Local Git Branches
+---------------------------
+
+Show current branch:
+	terminal --> git branch
+
+Rename current branch:
+	terminal --> git branch -m development
+
+Set upstream from local development to remote origin:
+	terminal --> git branch --set-upstream-to=origin development
+
+--------------------------------
+Making Changes from local Branch
+--------------------------------
+
+Create new file:
+	terminal --> touch index.html
+
+Check if file is created:
+	terminal --> git status
+
+Add the file:
+	terminal --> git add index.html
+
+Stage file:
+	terminal --> git commit -m "added index.html for test merge"
+
+
+--------------------------------
+Delete An Unmerged Branch in Git
+--------------------------------
+
+Delete branch without merged changed:
+	terminal --> git branch --delete --force development	// Force delete branch without pushed changes default syntax
+	terminal --> git branch -D development			// Force delete branch without pushed changes short syntax
+
+--------------------------------
+Merge Git Branch Into Main
+--------------------------------
+
+Got ot main local branch:
+	terminal --> git checkout main
+
+Merge main branch with development branch:
+	terminal --> git merge development
+
+
+--------------------------------
+Push Local Branch to Remote
+--------------------------------
+
+Push changes to remote branch:
+	terminal --> git push origin main
+	- if SSH key is used - enter password
+
+Create new branch named CSS:
+	terminal --> git checkout -b CSS
+
+Set upstream from local CSS to remote origin:
+	terminal --> git branch --set-upstream-to=origin CSS
+
+Create css file:
+	terminal --> touch main.css
+
+Add file:
+	terminal --> git add .
+
+Commit file:
+	terminal --> git commit -m "added main.css file"
+
+Push changes from CSS branch to origin remote branch:
+	terminal --> git push origin CSS
+
+
+-------------------------------------
+Merge Local Branch into Remote Branch
+-------------------------------------
+ 
+On GitHub Server we can review changes by pressing "Compare & pull request" button.
+
+We can set title and description and create Pull Request. 
+Check if there are no conflicts.
+Press 'Merge pull request' and 'Confirm merge' to close the pull request.
+Delete branch by pressing 'Delete branch' if no need of it any more.
+
+
+
+
+
+=========================
+	STASHING
+=========================
+
+-----------------------
+Create your first stash
+-----------------------
+
+The code that is not added, committed and pushed to repo can be saved by stashing it (put it in a box for later). Files must be added !
+	terminal --> git add .
+	terminal --> git stash		// create a stash (zip) with worked changes
+
+Go to main branch and create new file named index2.html
+	terminal --> touch testtext.txt
+
+Add some text in it:
+	terminal --> echo "added some text" > testtext.txt
+
+We can check if text is in the file if we open the file with nano:
+	terminal --> nano testtext.txt
+	terminal --> ctrl + x 	// close the file		
+
+Add files:
+	terminal --> git add .
+
+Stash work:
+	terminal --> git stash	// all files are stashed and result on the console is: 
+		Saved working directory and index state WIP on main: cbbbcdf added all other files
+
+Check status:
+	terminal --> git status
+result:
+	On branch main
+	Your branch is up to date with 'origin/main'.
+
+	nothing to commit, working tree clean
+
+...working on other tasks...
+
+---------------------------------------
+Download and Integrating Remote Changes
+---------------------------------------
+
+check if we can push other done work:
+	terminal --> git push origin main
+
+if we receive a message that say we have to pull from remote we must execute:
+	terminal --> git pull origin main
+
+After our project is up to date we can push new changes to the remote repo:
+	terminal --> git push origin main
+
+
+-----------------------
+Unstash work in branch
+-----------------------
+
+List stashed work:
+	terminal --> git stash list
+
+Unstash work box:
+	terminal --> git stash pop <stash_index>	// pop specific stash if more than one
+
+Check status:
+	terminal --> git status		// we have files ready to be committed
+
+Commit files:
+	terminal --> git commit -m "add files from stash"
+
+Push files to remote repo:
+	terminal --> git push origin main
+
+
+
+-----------------------
+Create Multiple Stashes
+-----------------------
+
+Create new file:
+	terminal --> touch support.html
+
+Check status:
+	terminal --> git status
+
+Add the created file:
+	terminal --> git add support.html
+
+Stash the file:
+	terminal --> git stash
+
+List stashes:
+	terminal --> git stash list
+
+Create another file
+	terminal --> touch support-bg.html
+
+Add the created file:
+	terminal --> git add support-bg.html
+
+Stash the file:
+	terminal --> git stash save "message of the stash"		// save stash with message
+
+List stashes:
+	terminal --> git stash list
+
+Result:
+stash@{0}: WIP on main: message of the stash
+stash@{1}: WIP on main: 483d1f5 Merge branch 'main' of https://github.com/entermix123/git-demo
+
+New stash is set as index 0 in stashes collection !
+
+We can see the content of specific stash:
+	terminal --> git stash show <stash_index>
+
+Unpack the first (newest) stash (index 0):
+	terminal --> git stash pop		// pop function delete the first stash from stash collection
+
+Unpack specific stash from the stash collection:
+	terminal --> git stash pop <stash_index>	// pop <stash_index> delete the specific stash from stash collection
+
+
+----------------------------
+Apply a Single Stashed State
+----------------------------
+
+List stashes:
+	terminal --> git stash list
+
+We can see the content of specific stash:
+	terminal --> git stash show <stash_index>
+
+Unpack and not delete the stash from stash collection:
+	terminal --> git stash apply			// apply the first stash (index 0)and save stash in the collection
+
+Unpack and not delete specific stash from stash collection:
+	terminal --> git stash apply <stash_index>	// apply the first stash (index 0)and save stash in the collection
+
+
+------------------------------------
+Delete Stashes from Stash collection
+------------------------------------
+
+List stashes:
+	terminal --> git stash list
+
+We can see the content of specific stash:
+	terminal --> git stash show <stash_index>
+
+Delete newest stash (index 0) from stash collection:
+	terminal --> git stash drop
+
+Delete specific stash from stash collection:
+	terminal --> git stash drop <stash_index>
+
+
+------------------------------------
+Delete All Stashes in the collection
+------------------------------------
+
+List stashes:
+	terminal --> git stash list
+
+Delete all stashes:
+	terminal --> git stash clear
+
+
+
+===================================
+Windows and Linux commands with Git
+===================================
+
+Windows list current directory
+	terminal --> dir
+
+Linux list current directory:
+	terminal --> ls
+
+Create lang.txt file:
+	terminal --> touch lang.txt
+
+Open current folder in explorer:
+	terminal --> explorer .
+
+If we Rename file in explorer, in git cli we have executed deletion and creation of the same file with different name.
+
+Check actions made:
+	terminal --> git status
+
+Create css folder in current location:
+	terminal --> mkdir css
+
+Move lang.txt file to css folder:
+	terminal --> mv lang.txt css/
+
+If we use Git CLI no deletion is executed!
+
+Move lang.txt file with git CLI - no deletion is executed, only moved:
+	terminal --> git mv text.txt css/ 
+
+Check actions made:
+	terminal --> git status
+
+Rename file with git cli:
+	termina --> git mv index2.html index23.html	// mv is used also to rename file
+
+If we use the same command to rename file without git, the file will be deleted and new file will be created:
+	terminal --> mv index2.html index234.html
+
+Check actions made:
+	terminal --> git status
+
+CLI help:
+	terminal --> help
+
+
+---------------------------------------------
+Show Changes Between Commits And Working Tree
+---------------------------------------------
+
+Show files in current directory:
+	terminal --> ls
+
+Edit some file in the directory:
+	terminal --> nano file_name
+
+Edit file, save and exit editor
+	edit - make changes in the file
+	
+	exit:
+		terminal --> ctrl + x
+	save:
+		terminal --> enter
+
+Show git status:
+	terminal --> git status
+
+Show differences before and after edit:
+	terminal --> git diff				// show differences before and after edit the files
+
+Show differences for specific file:
+	terminal --> git diff file_name			// if file is in different dir, set file_path/file_name
+
+
+-----------------------------------
+Undoing Changes to The Working Copy
+-----------------------------------
+
+Show short syntax for status:
+	terminal --> git status -s
+
+Restore changes to specific file:
+	terminal --> git checkout file_name
+	or
+	terminal --> git restore file_name
+
+
+----------------
+Show Commit Logs
+----------------
+
+Create new file:
+	terminal --> touch log.txt
+
+Add text in the file:
+	terminal --> nano log.txt
+
+Edit file, save and exit editor
+	edit - make changes in the file
+	
+	save:
+		terminal --> ctrl + s
+	exit:
+		terminal --> ctrl + x
+
+Add the file:
+	terminal --> git add log.txt
+
+Commit changes:
+	terminal --> git commit -m "added first log file"
+
+Show git status:
+	terminal --> git status
+
+
+Edit file, save and exit editor again
+	edit - make changes in the file log.txt
+
+	save:
+		terminal --> ctrl + s
+	exit:
+		terminal --> ctrl + x
+
+Add the file:
+	terminal --> git add log.txt
+
+Commit changes:
+	terminal --> git commit -m "second edit of the log file"
+
+Show logs for this repo:
+	terminal --> git log
+	- choose the log we want to checkout to - the one that works properly !!!
+
+Show commits logs in one line:
+	terminal --> git log --oneline
+
+
+----------------------------
+Undo Specific Change Commits
+----------------------------
+
+For the commit id we can take only the first 5-6 characters of the id. The system will recognize it.
+
+How to revert to first editing only:
+	terminal --> git checkout <working_commit_id> -- <file_name>
+
+Show file content to confirm that the commit is reverted:
+	terminal --> nano log.txt
+
+Commit the reverted changes:
+	terminal --> git commit -m "revert file to specific commit"
+
+Push changes to origin:
+	terminal --> git push origin main
+
+Show commits logs in one line:
+	terminal --> git log --oneline
+
+
+
+==============================
+	REBASING - GIT
+==============================
+
+
+---------------------------------------
+Prepare Commit For Changing Their Order
+---------------------------------------
+
+
+Create new branch:
+	terminal --> git checkout -b feature1
+
+Set upstream for the branch:
+	terminal --> git branch --set-upstream-to=origin feature1
+
+
+Create new file:
+	terminal --> touch rebase.txt
+
+Open the file and make some edit:
+	terminal --> rebase.txt
+
+Show status:
+	terminal --> git status
+
+Add, commit and push file:
+	terminal --> git add rebase.txt
+	terminal --> git commit -m "added rebase file"
+
+Move to main branch, create new file - rebase2.txt, add rebase2.txt, commit, show status:	
+	terminal --> git checkout main
+	terminal --> touch rebase2.txt
+	terminal --> git add rebase2.txt
+	terminal --> git commit -m "added rebase2.txt"
+	terminal --> git status
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+The first two commit are the newest that we made. Now we are going to change their order.
+
+
+-------------------------------
+Change The Order Of The Commits
+-------------------------------
+
+Got to feature1 branch and rebase main branch:
+	terminal --> git checkout feature1
+	terminal --> git rebase main
+
+result: Successfully rebased and updated refs/heads/feature1
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+Now the last commit is on branch feature1 and not as we made it on main branch.
+
+We have rebase2.txt file that we added in main branch. We can open it and make some changes:
+	terminal --> rebase2.txt
+	- add text 'made editing from feature1 branch' and save
+
+Add and commit changes on feature1 branch:
+	terminal --> git add rebase2.txt
+	terminal --> git commit -m "added changes in rebase2.txt file"
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+We can see the changes are made.
+
+Go to main branch and check that rebase.txt is not available in this branch and editing from feature1 branch is not added:
+	terminal --> git checkout main	
+	terminal --> ls
+	terminal --> rebase2.txt
+
+Merge feature1 branch in main branch:
+	terminal --> git merge feature1
+
+Show the existing file rebase.txt in main branch and added changes in rebase2.txt file:
+	terminal --> ls
+	terminal --> rebase2.txt
+
+
+
+------------------------
+Compare Two Git Branches
+------------------------
+
+Make some changes in rebase.txt and rebase2.txt from feature1 branch:
+	terminal --> rebase.txt
+	- add text 'made changes from feature1 branch'
+
+	terminal --> rebase2.txt
+	- add text 'made changes from feature1 branch again'
+
+Show status:
+	terminal --> git status
+
+Add and commit changes in feature1 branch:
+	terminal --> git add .
+	terminal --> git commit -m "made changes in rebase.txt and rebase2.txt files from feature1 branch"
+
+Go to main branch and add changes to rebase.txt file only:
+	terminal --> git checkout main
+	terminal --> rebase.txt
+	- add text "made last changes from main branch"
+
+Show differences between main and feature1 branches:
+	terminal --> git diff main feature1
+	
+Show differences in other order - first from feature1 branch and then from main branch:
+	terminal --> git diff feature1 main
+
+
+
+-------------------------
+Git Rebase Merge Conflict
+-------------------------
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+Go to feature1 branch:
+	terminal --> git checkout feature1
+	result - we have conflict to solve
+
+Edit rebase.txt and rebase:
+	terminal --> rebase.txt
+	- solve conflicts in the text
+
+	terminal --> git rebase --continue	// this solve the issue with rebase.txt file
+
+	terminal --> git rebase --skip 		// this skip the conflict with rebase2.txt file
+
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+
+
+
+=============
+Tagging - Git
+=============
+
+--------------------------
+Create and Delete New Tags
+--------------------------
+
+Create tag:
+	terminal --> git tag NewTag
+
+Show tags:
+	terminal --> git tag --list
+	- we can see NewTag is listed
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see at the top the we have tag creation
+
+Delete the tag:
+	terminal --> git tag -d NewTag
+
+Show tags:
+	terminal --> git tag --list
+	- no tags are listed
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see at the top the we have tag creation
+
+
+--------------------------
+Viewing and Comparing Tags
+--------------------------
+
+Create tags:
+	terminal --> git tag v_1.0
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see at the top the we have tag v_1.0 creation
+
+Show details of the tag:
+	terminal --> git show v_1.0
+
+Add new file named tag.txt:
+	terminal --> touch tag.txt
+	- add text "added text in tag.txt from main branch for tag v_2.0"
+
+Show status, add tag.txt and commit changes:
+	terminal --> git status
+	terminal --> git add tag.txt
+	terminal --> git commit -m "added changes for version v_2.0"
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see at the top the we have v_2.0 commit, but the tag is still v_1.0
+
+Create tag v_2.0:
+	terminal --> git tag v_2.0
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- now we have tag v_2.0 and we can push changes to the server
+
+We can make comparison between these two version:
+	terminal --> git diff v_1.0 v_2.0
+	- we can see the changes between n the two versions
+
+
+------------------------------
+	Annotated Tags
+------------------------------
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+Make 2 more edits and commits in tag.txt:
+	- first edit:
+	terminal --> tag.txt
+	- add text "made changes "first edit for tag annotation testing"
+	terminal --> git add .
+	terminal --> git commit -m "new edit"
+
+	- second edit:
+	terminal --> tag.txt
+	- add text "made changes "second edit for tag annotation testing"
+	terminal --> git add .
+	terminal --> git commit -m "another edit"
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see that there are no new tags for latest commits
+
+Add message for newest commit - version v_2.1:
+	terminal --> git tag -a v_2.1
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see that latest commit (another edit) have tag v_2.1
+
+Show information about different version:
+	terminal --> git show v_2.1
+	- we can see information about version 2.1 - latest.
+	- we can see tag name, tagger name and date of the changes
+
+	terminal --> git show v_2.0
+	- we can see information about version 2.0
+
+
+
+----------------------
+Tags A Specific Commit
+----------------------
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- copy code of the specific commit
+
+Set description for the chosen commit:
+	terminal --> git tag -a v_0.9_beta ed7f62e
+	- '-a' - message, 'v_0.9_beta' - version, 'ed7f62e' - code of the commit
+	- in the opened document enter text 'the beta version of the project', save and close the document
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see that the tag was added to the specific commit
+
+
+Add description for specific tag for commit:
+	terminal --> git log --oneline --decorate --all --graph
+	- choose another commit and copy the code
+
+	terminal --> git tag -a v_0.95_rebase e0778fc
+	- in the opened document enter text 'added rebase file for rebase tests in the project', save and close the document
+
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see that the new tag is created for the chosen commit
+
+Show description for the tag:
+	terminal --> git show v_0.95_rebase	
+	- we can see the description we entered in the tag
+
+
+----------------------------------------
+Replace Existing Tag with The Given Name
+----------------------------------------
+
+Show the commits from any branch in graph and copy code of commit with tag: v_0.9_beta:
+	terminal --> git log --oneline --decorate --all --graph
+	- we want to change the name of specific tag - tag: v_0.9_beta
+
+Apply specific tag to other commit:
+	terminal --> git tag -a v_0.9_beta -f c723e6e
+	- '-a' - message, 'v_0.9_beta' - version, '-f' - force, 'c723e6e' - code of the specific commit we want to set the tag
+	- in the opened document enter text 'the beta version of the project edited', save and close the document
+
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- we can see that the tag is moved to the chosen commit 
+
+Show description for the tag:
+	terminal --> git show v_0.9_beta	
+	- we can see that the text in the description is also updated
+
+
+
+-------------------
+Push Tags To GitHub
+-------------------
+
+List all tags:
+	terminal --> git tag --list
+
+We can push specific tag to GitHub:
+	terminal --> git push origin v_0.9_beta
+
+In GitHub Project "Code/Tags" we can see that we have new tag pushed.
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+
+We can push another tag to GitHub:
+	terminal --> git push origin v_0.95_rebase
+
+In GitHub Project "Code/Tags" we can see that we have new tag pushed.
+
+Push all tags in GitHub:
+	terminal --> git push origin main --tags
+
+In GitHub Project "Code/Tags" we can see that we have all tags pushed. Also we can download the project in this specific version by downloading the zip file.
+
+
+
+---------------------
+Delete Tags To GitHub
+---------------------
+
+Check pushed tags in GitHub server. Create a Releases and chose version with the tag we want to delete and copy the code.
+
+Show the commits from any branch in graph:
+	terminal --> git log --oneline --decorate --all --graph
+	- compare the tag code from GitHub server and tag code on your local computer. If they are the same we can delete the tag.
+
+
+Delete tag in GitHub:
+	- set global rights with SSH
+	terminal --> git push :v_0.9_beta
+	- enter password
+	- the tag and release are deleted
+
+
+
+
+========================
+	Git Help
+========================
+
+
+--------------------
+All Git Command Help
+--------------------
+
+We can see help for any topic in Git. It is important for us to be able to use the git help!
+
+1. Git stash
+	terminal --> git stash --help
+
+2. Git branch:
+	terminal --> git branch --help
+
+3. Git checkout:
+	terminal --> git checkout --help
+
+4. Git add:
+	terminal --> git add --help
+	- delete last directory and go to file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/ to see everything in a list
+
+Show all available git commands:
+	terminal --> git help
+	terminal --> git help -a	// subcommands
+	terminal --> git help -g	// tutorials
+
+
+
+---------------------------------
+Top 20 Git Commands With Examples
+---------------------------------
+
+https://dzone.com/articles/top-20-git-commands-with-examples
+
+
+
+
+===============================
+Git GUI: Graphic User Interface
+===============================
+
+-------------------------------------------
+Add, Stage and Commit Your Project From GUI
+-------------------------------------------
+
+Watch videos to get familiar with Git User Interface
+
+------------------------
+All Git Command From GUI
+------------------------
+
+https://dzone.com/articles/top-20-git-commands-with-examples
+
+
+
+===============================
+Git GUI: Graphic User Interface
+===============================
+
+-----------------------------
+Find Real GitHub Repo Project
+-----------------------------
+
+Check CMDER Repo - https://github.com/cmderdev/cmder
+
+---------------------
+Review GitHub Commits
+---------------------
+
+Get familiar with commits details in GitHub
+
+------------------------------
+Forking A Real GitHub Projects
+------------------------------
+
+Press Fork Button in Top Right on the Project Repo. It will create a copy (Fork) of the project in our GitHub account.
+
+Be careful when creating pull requests to projects, because if the help is not adequate, the owner can block your user to work with the project.
+
+------------------------------------
+Create and Manage Branch from GitHub
+------------------------------------
+
+Be careful when creating pull requests to projects, because if the help is not adequate, the owner can block your user to work with the project.
+
+We can go to Code Tab in the specific project repository, open branch menu and search for specific branch. If the branch is not existing we can create it. Add a file to the branch and make pull request to the created branch.
+
+Set description and Commit to created branch.
+
+When we go back to main branch, we can create pull request and merge the newly created branch with all changes in it.
+
+We can create pull request in the newly created branch.
+
+When we create a pull request we can see the compatibility with the project and merge after successful checks.
+
+We can see all branches in Code/Branches for current project.
+
+
+
+---------------------
+About GitHub Packages
+---------------------
+
+Code/Packages - on the right side menu - advanced topic
+
+
+-----------------------------------
+Managing Tag and Releases in GitHub
+-----------------------------------
+
+We can track releases in project in Code/Releases Tab
+
+We can create releases, add a notes and descriptions.
+
+We can use tag tab to create releases from tags.
+
+
+-------------------
+GitHub Contributors
+-------------------
+
+We cab see details about contributors on Code/Contributors
+
+
+----------------------
+Licensing a Repository
+----------------------
+
+License is added when repository is created
+
+
+-------------------------
+Real Pull Request Project
+-------------------------
+
+We can see pull requests in Pull Request Tab
+
+
+-------------------------------
+Create and Manage GitHub Issues
+-------------------------------
+
+We can see details in Issues Tab. We can create issues for specific problems and from there branches for the specific issues can be created and worked on.
+
+
+----------------------------
+GitHub Labels and Milestones
+----------------------------
+
+We can find Labels in Issues/Labels. They are used in descriptions of opened issue. We can create our own labels.
+
+Milestones can be found in Issues/Milestones. They are used for grouping issues and problems, setting timeframe for the issues and description of the goals of the Milestone.
+
+
+--------------
+GitHub Actions
+--------------
+
+Actions are used to automate Continues Development and Continue Integrations (CD/CI workflow).
+
+
+--------------------
+GitHub Project Board
+--------------------
+
+We can find it in Projects Tab. We can manage entire project from this tab. Create Board for specific topics in the project. Create timeline board and issue board.
+
+
+------------
+GitHub Wikis
+------------
+
+Create similar to Wikipedia pages. Description of the project
+
+
+-----------------------------------------
+GitHub Security Policy To Your Repository
+-----------------------------------------
+
+We can create security policy for your project. Security advisor create notifications policy for project events.
+
+
+----------------------------------------
+Viewing a Summary of Repository Activity
+----------------------------------------
+
+We can find Activities in Insights tab. Choosing a period on Pulse tab, we can group activities in it.
+
+
+-------------------------------
+Accessing Basic Repository Data
+-------------------------------
+
+We can see different data in tabs Insights:
+	- Contributors
+	- Community
+		- major parts of the project is listed
+	- Commits
+		- poll graph for commits is visualized
+	- Code frequency 
+		- visualized data for code contribution - adds and deletions of code
+	- Dependency graph
+	- Network
+		- map of people and their contributions in time
+	- Forks
+		- all people that made a copy of the project
+
+
+----------------------------
+Managing Repository Settings
+----------------------------
+
+We have to be owner of the project to edit settings - Last tab of the project header. 
+
+In Options tab we can enable and disable specific objects for the project.
+
+Features:
+	- Wiki editors
+	- Issues 
+	- Sponsorship
+	- Projects
+
+Data services:
+	- Security alerts
+	- Preserve this repository
+
+Merge button:
+	- Allow merge commits
+	- Allow rebase merging
+	- Allow rebase merging
+	- Automatically delete head branches
+
+GitHub Pages:
+	- Choose Branch - It allow us to publish specific branch and preview how it looks when repo link is visited.
+	- Choose a theme - customize visuals on the page
+	- Custom domain - we can set custom domain for the page
+
+Danger Zone:
+	- We can make the repository private
+	- We can transfer ownership of the project to other account
+	- Archive the repository	
+	- Delete the repository
+
+----------------------------
+Enabling Branch Restrictions
+----------------------------
+
+In Manage access tab we can specify access of the collaborators in the project.
+	- Invite collaborator
+
+In Branches tab we can manage default branch and branch protection rules.
+	- we can add branch rules
+		- we can add requirement for number of reviews before merging pull request
+
+--------
+Webhooks
+--------
+
+Settings/Webhooks
+
+Allow external services to be notified when certain event happen. POST request is sent to provided URLs.
+
+Mode info: https://docs.github.com/en/webhooks
+
+We can specify urls and code format and secrets to communicate with external services.
+
+We can customize information received.
+
+
+------------------------------------------------
+Email Notification for Pushes To Your Repository
+------------------------------------------------
+
+Settings/Notifications
+
+We can add number of emails to push notifications to and set approved header.
+	- team emails
+	- the header can be set as condition the send messages to the email list.
+
+
+-----------------------------------------------------
+GitHub Repository Integrations, Deploy Key and Secret
+-----------------------------------------------------
+
+
+Integrations:
+
+The path to access Integrations is true profile settings and not project settings !!!
+
+Profile/Settings/Developer Settings/GitHub App, OAuth App, Personal access tokens
+
+
+Deploy Key:
+
+Settings/Deploy keys - are used as access keys for the project (like SSH keys for GitHub)
+
+
+Secret:
+
+Environment variable - used for encrypt secret key or password for project action. 
+
+
+Actions:
+
+Manage settings and restrictions for actions usage.
+
+
+
+----------------------------
+Temporary Interaction Limits
+----------------------------
+
+Settings / Moderation Options / Interaction Limits
+
+We can enable settings:
+	- Limit to existing users
+	- Limit to prior contributors
+	- Limit to repository collaborators
+
+
+-------------------------------
+Managing User Accounts Settings
+-------------------------------
+
+Profile / Settings
+
+TABS:
+
+Profile - name, email, url, Company, location and other personal information
+
+Account
+	Change Username	- We can change our username, but our local computer will not be able to connect to any repository, 			because addresses will be different from saved in the computer.
+
+	Export account data - We can export account data
+
+	Successor settings - Assign Successor
+
+	Mobile settings - set mobile responsive pages
+
+	Delete account - delete account if necessary 
+
+Security - set security options like 2 factor auth etc.
+
+Security log - see and manage login logs 
+
+Email - set primary and secondary emails
+
+Notification - set notifications for projects events
+
+Billing - for advanced account features
+
+SSH and GPG keys - set keys for access
+
+Blocked Users - block specific user if act inadequate
+
+Repositories - manage repositories
+
+Organization - Create organization - like account inside your account - useful ! 
+
+Saved Replies - replay templates
+
+Applications - set applications
+
+Developer settings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
